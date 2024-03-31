@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rodai por Nós</title>
+    <link rel="icon" type="image/x-icon" href=" {{ url_for ('static', filename='img/favicon.png') }}">
+
+</head>
+<body>
+
+<div class="bg">
+    <div class="caixa-esquerda">
+        <!-- Conteúdo da caixa da esquerda (branca) -->
+        <div class="caixa-logo"> 
+            <img src="{{ url_for('static', filename='img/logo-home.png') }}">
+        </div>
+        <p style="font-family: Roboto Mono; font-size: 30px;">O resumo do Roda Viva feito por Inteligência Artificial 🤖</p>
+        <form action="/resultado" method="post">
+            <!-- EDITORIA -->
+            <div class="div-editoria">
+                <p class="select-form">VOCÊ PODE FILTRAR OS EPISÓDIOS POR ASSUNTO</p>
+                <select name="editorias" id="escolhe_editoria" onchange="filtrarEntrevistados()">
+                    {% for editoria in relacao_editorias %}
+                    <option value="{{ editoria }}">{{ editoria }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- ENTREVISTADO -->
+            <div class="div-episodio">
+                <p class="select-form">OU, SE PREFERIR, PODE SELECIONAR UMA ENTREVISTA ESPECÍFICA</p>        
+                <select name="entrevistado" id="escolhe_entrevistado">
+                    {% for nome in nomes %}
+                    <option value="{{ nome }}"> {{ nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class= "botao-op" type="submit"> SUBMETER 🚀 </button>
+        </form>
+        <script>
+            function filtrarEntrevistados() {
+                var editoriaSelecionada = document.getElementById('escolhe_editoria').value;
+                var dropdownEntrevistados = document.getElementById('escolhe_entrevistado');
+                dropdownEntrevistados.innerHTML = ''; // Limpa as opções existentes
+        
+                // ADICIONA OS ENTREVISTADOS À LISTA
+                var relacaoEditorias = {{ relacao_editorias | tojson | safe }}; 
+                var entrevistados = relacaoEditorias[editoriaSelecionada];
+                for (var i = 0; i < entrevistados.length; i++) {
+                    var option = document.createElement('option');
+                    option.text = entrevistados[i];
+                    option.value = entrevistados[i];
+                    dropdownEntrevistados.appendChild(option);
+                }
+            }
+        
+            // Chama a função inicialmente para popular os entrevistados baseado na primeira editoria
+            filtrarEntrevistados();
+        </script>
+</div>
+<div class="caixa-direita">
+    <!-- Conteúdo da caixa da direita (cinza) -->
+    <h2 style="font-family: Roboto Mono; font-weight: 400; font-size: 40px; text-transform: uppercase;">O que <br> já tem <br> por aqui</h2>
+    <div class="botao-novo">
+        <h2 class="botao-novo">⭐️ ADICIONADO RECENTEMENTE</h2>
+    </div>
+    <div class="episodio-novo">
+        <h5>{{ultima_entrevista.nome_entrevistado}}</h5>
+        <p>{{ultima_entrevista.data_publicacao.strftime('%d/%m/%Y')}}</p>
+    </div>
+    <div class="ultimos-episodios">
+        <h2 class="botao-novo">EPISÓDIOS ANTERIORES</h2>
+        {% for entrevista in historico_entrevistas %}
+            <p><a>{{entrevista.nome_entrevistado}}</a></p>
+        {% endfor %}
+        </div>
+        <div> 
+            <hr>
+            <footer>
+                <p class="texto-rodape"> O <strong>RodAI por Nós</strong> foi desenvolvido por Christina Souza, Cindy Damasceno, João Barbosa, Paulo Fehlauer e Sumaia Villela como projeto final da disciplina de Machine Learning do Master em Jornalismo de Dados, Automação e Storytelling do Insper. Esta é a <strong>versão beta da ferramenta</strong> e, por isso, qualquer resultado deve ser avaliado com cautela. Para mais informações, <strong>visite a metodologia do RodAI.</strong></p><br>
+            </footer>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
