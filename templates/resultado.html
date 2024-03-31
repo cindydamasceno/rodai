@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+    <link rel="icon" type="image/x-icon" href=" {{ url_for ('static', filename='img/favicon.png') }}">
+
+</head>
+<body>
+    <!-- Logo cabeçalho canto superior esquerdo -->
+    <div class="logo-resultado">
+        <a href="/"><img src="{{ url_for('static', filename='img/logo-resultado.png') }}" alt="Voltar para Home"></a>
+    </div> 
+    <!-- Caixa de resultado -->
+    <div class="caixa-esquerda">
+        <!-- Conteúdo da caixa da esquerda (branca) -->
+        <p style="font-family: Roboto Mono; font-weight: 700; font-size: 20px; margin-bottom: 0;">TÁ NA MÃO 🤖</p>
+        <p style="font-family: Roboto Mono; font-weight: lighter; font-size: 18px;">Veja o resumo do episódio <strong>{{ dados_entrevista.nome }}</strong>, que foi ao ar em <strong>{{ dados_entrevista.data }}</strong>:</p>
+        <div class="cabecalho-resultado">
+            <h5>Nome do entrevistado:</h5>
+            <p>{{ dados_entrevista.nome }}</p>
+            <h5>Cargo ou função do entrevistado:</h5>
+            <p>{{ dados_entrevista.cargo }}</p>
+            <h5>Nome dos entrevistadores:</h5>
+            <p>{{ dados_entrevista.entrevistadores }}</p>
+            <br>
+            <br>
+        </div>
+        <div class="botao-editoria">
+            <!-- Exibe editorias extraídas pelo GPT -->
+            {% for editoria in dados_entrevista.editorias %}
+            <button type="button">{{ editoria }}</button>
+            {% endfor %}
+        </div> <br><hr><br>
+        <div class="texto-resultado">
+            {{ dados_entrevista.texto}}
+        </div>
+        <div class="botao-resultado">
+            <a href="/download_transcricao" class="botao-resultado">BAIXAR TRANSCRIÇÃO 📝</button>
+            <a href="{{ dados_entrevista.url }}" class="botao-resultado">VER VÍDEO NA ÍNTEGRA 📹</a>
+        </div>
+    </div>
+
+</body>
+</html>
