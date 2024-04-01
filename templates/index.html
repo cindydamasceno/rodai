@@ -23,7 +23,7 @@
         <form action="/resultado" method="post">
             <!-- EDITORIA -->
             <div class="div-editoria">
-                <p class="select-form">VOCÊ PODE FILTRAR OS EPISÓDIOS POR ASSUNTO <br><small><<span style="font-weight: lighter;">A OPÇÃO COM TODOS OS EPISÓDIOS ESTÁ ATIVADA POR PADRÃO</span></small></p>
+                <p class="select-form">VOCÊ PODE FILTRAR OS EPISÓDIOS POR ASSUNTO <br><small><span style="font-weight: lighter;">A OPÇÃO COM TODOS OS EPISÓDIOS ESTÁ ATIVADA POR PADRÃO</span></small></p>
                 <select name="editorias" id="escolhe_editoria" onchange="filtrarEntrevistados()">
                     {% for editoria in relacao_editorias %}
                     <option value="{{ editoria }}">{{ editoria }}</option>
