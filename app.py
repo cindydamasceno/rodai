@@ -59,7 +59,7 @@ def home():
     ultima_entrevista = collection.find_one(sort=[('data_publicacao', -1)])
 
     # Buscar as últimas 3 entrevistas excluindo a última, ordenadas por data de publicação
-    historico_entrevistas = collection.find(sort=[('data_publicacao', -1)]).skip(2).limit(3)
+    historico_entrevistas = collection.find(sort=[('data_publicacao', -1)]).skip(1).limit(3)
     
     print(relacao_editorias)
     return render_template('index.html', relacao_editorias=relacao_editorias,nomes=nomes, editorias=editorias, datas=datas, ultima_entrevista=ultima_entrevista, historico_entrevistas=historico_entrevistas)
