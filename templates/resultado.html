@@ -38,9 +38,16 @@
             {% endfor %}
         </div> <br><hr><br>
         <div class="texto-resultado">
-            {{ dados_entrevista.texto}}
+            <ul>
+                {% for item in dados_entrevista.texto %}
+                    <li>
+                        <span style="font-weight: bold;">{{ item.get('tempo_inicio', 'Tempo não especificado') }}</span>
+                        <span class="font-weight: lighter;"> - {{ item.get('descricao', 'Descrição não disponível') | safe }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
-        <div class="botao-resultado">
+                <div class="botao-resultado">
             <a href="/download_transcricao" class="botao-resultado">BAIXAR TRANSCRIÇÃO 📝</button>
             <a target="_blank" href="{{ dados_entrevista.url }}" class="botao-resultado">VER VÍDEO NA ÍNTEGRA 📹</a>
         </div>
