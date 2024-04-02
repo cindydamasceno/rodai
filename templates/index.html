@@ -24,7 +24,7 @@
         <form action="/resultado/" method="post">
             <!-- EDITORIA -->
             <div class="div-editoria">
-                <p class="select-form">VOCÊ PODE FILTRAR OS ENTREVISTADOS POR ASSUNTO <br><small><span style="font-weight: lighter;">POR PADRÃO, A OPÇÃO "TODOS OS EPISÓDIOS" É SELECIONADA AUTOMATICAMENTE</span></small></p>
+                <p class="select-form">VOCÊ PODE FILTRAR OS ENTREVISTADOS POR ASSUNTO <br><small><span style="font-weight: lighter;">POR PADRÃO, A OPÇÃO "TODOS OS ENTREVISTADOS" É SELECIONADA AUTOMATICAMENTE</span></small></p>
                 <select name="editorias" id="escolhe_editoria" onchange="filtrarEntrevistados()">
                     {% for editoria in relacao_editorias %}
                     <option value="{{ editoria }}">{{ editoria }}</option>
@@ -33,7 +33,7 @@
             </div>
             <!-- ENTREVISTADO -->
             <div class="div-episodio">
-                <p class="select-form">OU, SE PREFERIR, PODE SELECIONAR UMA ENTREVISTA ESPECÍFICA</p>        
+                <p class="select-form">OU, SE PREFERIR, ESCOLHA UMA ENTREVISTA ESPECÍFICA DIRETAMENTE</p>        
                 <select name="entrevistado" id="escolhe_entrevistado">
                     {% for nome in nomes %}
                     <option value="{{ nome }}"> {{ nome }}</option>
@@ -67,7 +67,7 @@
     <!-- Conteúdo da caixa da direita (cinza) -->
     <h2 style="font-family: Roboto Mono; font-weight: 400; font-size: 40px; text-transform: uppercase;">O que <br> já tem <br> por aqui</h2>
     <div class="botao-novo">
-        <h2 class="botao-novo">ADICIONADO RECENTEMENTE ⭐️ </h2>
+        <h2 class="botao-novo">⭐️ ADICIONADO RECENTEMENTE</h2>
     </div>
     <div class="episodio-novo">
         <h5><a href="entrevistados/{{ultima_entrevista.nome_entrevistado}}">{{ultima_entrevista.nome_entrevistado}}</a></h5>
