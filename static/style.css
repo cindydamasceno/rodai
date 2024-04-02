@@ -1,3 +1,8 @@
+/* REMOVE FORMATAÇÃO DE LINKS */
+a, a:hover, a:focus, a:active {
+    text-decoration: underline;
+    color: inherit;
+}
 
 html, body {
     margin: 0;

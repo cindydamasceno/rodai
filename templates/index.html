@@ -19,11 +19,12 @@
         <div class="caixa-logo"> 
             <img src="{{ url_for('static', filename='img/logo-home.png') }}">
         </div>
-        <p style="font-family: Roboto Mono; font-size: 30px;">O resumo do Roda Viva feito por Inteligência Artificial 🤖</p>
-        <form action="/resultado" method="post">
+        <p style="font-family: Roboto Mono; font-size: 30px;margin-bottom: 0;">O resumo do Roda Viva feito por Inteligência Artificial 🤖</p>
+        <p style="font-family: Roboto Mono; font-size: 15px;font-weight: lighter;margin-bottom: 5%;">🚧 ATENÇÃO: ESTA FERRAMENTA ESTÁ EM VERSÃO DE TESTES. USE COM CAUTELA.</p>
+        <form action="/resultado/" method="post">
             <!-- EDITORIA -->
             <div class="div-editoria">
-                <p class="select-form">VOCÊ PODE FILTRAR OS EPISÓDIOS POR ASSUNTO <br><small><span style="font-weight: lighter;">POR PADRÃO, A OPÇÃO "TODOS OS EPISÓDIOS" É SELECIONADA AUTOMATICAMENTE</span></small></p>
+                <p class="select-form">VOCÊ PODE FILTRAR OS ENTREVISTADOS POR ASSUNTO <br><small><span style="font-weight: lighter;">POR PADRÃO, A OPÇÃO "TODOS OS EPISÓDIOS" É SELECIONADA AUTOMATICAMENTE</span></small></p>
                 <select name="editorias" id="escolhe_editoria" onchange="filtrarEntrevistados()">
                     {% for editoria in relacao_editorias %}
                     <option value="{{ editoria }}">{{ editoria }}</option>
@@ -58,7 +59,7 @@
                 }
             }
         
-            // Chama a função inicialmente para popular os entrevistados baseado na primeira editoria
+            // POPULA ENTREVISTADOS
             filtrarEntrevistados();
         </script>
 </div>
@@ -66,16 +67,16 @@
     <!-- Conteúdo da caixa da direita (cinza) -->
     <h2 style="font-family: Roboto Mono; font-weight: 400; font-size: 40px; text-transform: uppercase;">O que <br> já tem <br> por aqui</h2>
     <div class="botao-novo">
-        <h2 class="botao-novo">⭐️ ADICIONADO RECENTEMENTE</h2>
+        <h2 class="botao-novo">ADICIONADO RECENTEMENTE ⭐️ </h2>
     </div>
     <div class="episodio-novo">
-        <h5>{{ultima_entrevista.nome_entrevistado}}</h5>
+        <h5><a href="entrevistados/{{ultima_entrevista.nome_entrevistado}}">{{ultima_entrevista.nome_entrevistado}}</a></h5>
         <p>{{ultima_entrevista.data_publicacao.strftime('%d/%m/%Y')}}</p>
     </div>
     <div class="ultimos-episodios">
         <h2 class="botao-novo">EPISÓDIOS ANTERIORES</h2>
         {% for entrevista in historico_entrevistas %}
-            <p><a>{{entrevista.nome_entrevistado}}</a></p>
+            <p><a href="entrevistados/{{entrevista.nome_entrevistado}}">{{entrevista.nome_entrevistado}}</a></p>
         {% endfor %}
         </div>
         <div> 

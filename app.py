@@ -47,7 +47,7 @@ def home():
     todos_episodios=[]
     for episodio in collection.find():
         todos_episodios.append(episodio["nome_entrevistado"])
-        relacao_editorias["Todos os episódios"]=todos_episodios
+        relacao_editorias["Todos os entrevistados"]=todos_episodios
 
     for editoria in editorias:
         entrevistado_editoria=[]
@@ -64,8 +64,9 @@ def home():
     print(relacao_editorias)
     return render_template('index.html', relacao_editorias=relacao_editorias,nomes=nomes, editorias=editorias, datas=datas, ultima_entrevista=ultima_entrevista, historico_entrevistas=historico_entrevistas)
 
+
 # Rota para lidar com a pesquisa e exibir os resultados
-@app.route('/resultado', methods=['POST'])
+@app.route('/resultado/', methods=['POST'])
 def resultados():
     nome = request.form['entrevistado']
     resultados = collection.find({'nome_entrevistado': nome})
@@ -99,6 +100,43 @@ def resultados():
 
     # Retornar os resultados e o link para download da transcrição
     return render_template('resultado.html', dados_entrevista=dados_entrevista)
+
+#ROTA PARA CADA ENTREVISTADO
+
+@app.route('/entrevistados/<nome>', methods=['GET'])
+def entrevistados(nome):
+    resultado = collection.find_one({'nome_entrevistado': nome})
+    
+    if resultado:
+        editorias = resultado['editorias_provaveis']
+        cargo = resultado['cargo_funcao']
+        entrevistadores = resultado['nome_entrevistadores']
+        data = resultado['data_publicacao'].strftime('%d/%m/%Y')
+        pontos = resultado['pontos']
+        url = resultado['url']
+        transcricao = resultado['transcricao']
+
+        # PREPARAR DADOS PARA O ENTREVISTADO
+        dados_entrevista = {
+            'nome': nome.upper(),
+            'editorias': editorias,
+            'cargo': cargo,
+            'entrevistadores': ", ".join(entrevistadores),
+            'pontos': pontos,
+            'data': data,
+            'url': url,
+            'texto': pontos,
+            'transcricao': transcricao,
+        }
+
+        # Escrever a transcrição em um arquivo .txt
+        with open('transcricao.txt', 'w') as file:
+            file.write(str(transcricao))
+
+        # Retornar os resultados e o link para download da transcrição
+        return render_template('resultado.html', dados_entrevista=dados_entrevista)
+    else:
+        return "Entrevistado não encontrado."
 
 # Rota para fazer o download da transcrição completa da entrevista
 @app.route('/download_transcricao')
