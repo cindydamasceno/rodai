@@ -80,7 +80,7 @@ select, input{
     padding: 30px 50px;
     flex: 40%;
     background-color: #D2D2D2;
-    height: 120%;
+/*     height: 120%; */
 
 }
 .botao-novo {
