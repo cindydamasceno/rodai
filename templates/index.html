@@ -33,7 +33,8 @@
             </div>
             <!-- ENTREVISTADO -->
             <div class="div-episodio">
-                <p class="select-form">OU, SE PREFERIR, ESCOLHA UMA ENTREVISTA ESPECÍFICA DIRETAMENTE</p>        
+                <p class="select-form">SE PREFERIR, ESCOLHA UMA ENTREVISTA ESPECÍFICA DIRETAMENTE</p>
+                <label for="escolhe_entrevistado">ESCOLHA UMA ENTREVISTA</label>
                 <select name="entrevistado" id="escolhe_entrevistado">
                     {% for nome in nomes %}
                     <option value="{{ nome }}"> {{ nome }}</option>
