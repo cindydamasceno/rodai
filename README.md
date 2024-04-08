@@ -19,9 +19,6 @@ O uso é bastante simples. Basta filtrar os episódios por assunto. De toda form
 A metodologia aplicada para desenvolver o RodAI busca por automação e processamento de dados. Foi utilizado um notebook do Kaggle e modelo LLM do Whisper para transcrever o episódio. Os dados são armazenados em uma coleção no MongoDB para processamento posterior, enquanto uma mensagem é enviada via Telegram para confirmar a operação.
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan fringilla ipsum non egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan fringilla ipsum non egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan fringilla ipsum non egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-
-
 ## Limitações
 Em razão das inserções comerciais do próprio programa Roda Viva, em comemoração aos 55 anos no ar, o processamento não conseguiu diferenciar o que eram os episódios atuais do conteúdo publicitário. Por isso, as transcrições, em alguns casos, acabaram incorporando frases de convidados de programas antigos ao programa recente que estava sendo processado. Talvez haja a necessidade de pré-processar o conteúdo no MongoDB.
 
